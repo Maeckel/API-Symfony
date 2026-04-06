@@ -29,12 +29,12 @@
                     <td>
                         <form method="POST" action="{{ path('app_task_update', {id: task.id}) }}"> {# Formulaire pour modifier la statût d'une tâche #}
                             <input type="text" maxlength="30" name="statut" value="{{ task.status }}">
-                            <button type="submit">Modifier</button>
+                            <button class="btn" type="submit">Modifier</button>
                         </form>
                     </td>
                     <td>
                         <form method="POST" action="{{ path('app_task_delete', {id: task.id}) }}"> {# Formulaire pour supprimer une tâche #}
-                            <button type="submit">Supprimer</button>
+                            <button class="btn" type="submit">Supprimer</button>
                         </form>
                     </td>
                 </tr>
