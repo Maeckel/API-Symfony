@@ -27,18 +27,14 @@
                     <td class="title">{{ task.title }}</td>
                     <td class="desc">{{ task.description }}</td>
                     <td>
-                        <form method="POST" action="{{ path('app_task') }}"> {# Formulaire pour modifier la statût d'une tâche #}
-                            <input type="hidden" name="_method" value="PUT">
-                            <input type="hidden" name="id" value="{{ task.id }}">
-                            <input type="text" name="statut" value="{{ task.status }}">
-                            <button class="btn" type="submit">Modifier</button>
+                        <form method="POST" action="{{ path('app_task_update', {id: task.id}) }}"> {# Formulaire pour modifier la statût d'une tâche #}
+                            <input type="text" maxlength="30" name="statut" value="{{ task.status }}">
+                            <button type="submit">Modifier</button>
                         </form>
                     </td>
                     <td>
-                        <form method="POST" action="{{ path('app_task') }}"> {# Formulaire pour supprimer une tâche #}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="id" value="{{ task.id }}">
-                            <button class="btn" type="submit">Supprimer</button>
+                        <form method="POST" action="{{ path('app_task_delete', {id: task.id}) }}"> {# Formulaire pour supprimer une tâche #}
+                            <button type="submit">Supprimer</button>
                         </form>
                     </td>
                 </tr>
@@ -51,10 +47,9 @@
         </table>
     </div>
         <form method="POST" action="{{ path('app_task') }}"> {# Formulaire pour créer une tâche #}
-            <input type="hidden" name="_method" value="POST">
-            <input type="text" name="titre" placeholder="Titre" required> {# Tout les champs doivent ếtre renseignés #}
-            <input type="text" name="description" placeholder="Description" required>
-            <input type="text" name="statut" placeholder="En attente, En cours, Terminé..." required>
+            <input type="text" maxlength="50" name="titre" placeholder="Titre" required> {# Tout les champs doivent ếtre renseignés #}
+            <input type="text" maxlength="255" name="description" placeholder="Description" required>
+            <input type="text" maxlength="30" name="statut" placeholder="En attente, En cours, Terminé..." required>
             <button class="btn" type="submit">Ajouter</button>
         </form>
     </div>

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response; // Pour gérer les réponses
 use App\Entity\Task; // Récupération de la classe Tâche 
 use Symfony\Component\HttpFoundation\Request; // Permet de lire ce que le client envoie
 
-final class TaskController extends AbstractController {
+final class TaskApiController extends AbstractController {
 
     private EntityManagerInterface $entityManager;
 
@@ -19,48 +19,6 @@ final class TaskController extends AbstractController {
     }
 
     // Les routes sont configurées dans le fichier config/routes.yaml
-
-    public function index(Request $request): Response {
-
-         // Si tentative d'ajout
-        if($request->isMethod('POST') && $request->request->get('_method') === 'POST') {
-            $newTask = new Task(); // Création d'un nouveau objet avec les valeurs récupérées
-            $newTask->setTitle($request->request->get('titre'))
-                    ->setDescription($request->request->get('description'))
-                    ->setStatus($request->request->get('statut'));
-            $this->entityManager->persist($newTask); // Enregistrement
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_task'); // Interface web
-        }
-
-        // Si tentative de modification
-        if($request->isMethod('POST') && $request->request->get('_method') === 'PUT') {
-            $taskObject = $this->entityManager->getRepository(Task::class)->findOneBy(['id' => $request->request->get('id')]); // Récupération de la bonne tâche
-            if($taskObject) { // Si elle est trouvée alors on change le statut et on enregistre en BDD
-                $taskObject->setStatus($request->request->get('statut'));
-                $this->entityManager->flush();
-            }
-
-            return $this->redirectToRoute('app_task'); 
-        }
-
-        // Si tentative de suppression
-        if($request->isMethod('POST') && $request->request->get('_method') === 'DELETE') {
-            $taskObject = $this->entityManager->getRepository(Task::class)->findOneBy(['id' => $request->request->get('id')]);
-            if($taskObject) {
-                $this->entityManager->remove($taskObject);
-                $this->entityManager->flush();
-            }
-
-            return $this->redirectToRoute('app_task'); 
-        }
-
-        // Récupération de toutes les tâches
-        $tasks = $this->entityManager->getRepository(Task::class)->findAll(); // Utilisation de findAll() pour récuperer tout
-        return $this->render('task/index.html.twig', ['tasks' => $tasks]); // Envoi des tâches sur le twig
-    }
-
     // Les méthodes ci-dessous peuvent être tester à l'aide de POSTMAN
 
     // Endpoint pour lister une tâche existante

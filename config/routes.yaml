@@ -13,36 +13,47 @@ controllers:
 # Interface web
 app_task:
     path:       /tasks
-    controller: App\Controller\TaskController::index
+    controller: App\Controller\TaskWebController::index
+    methods:    [GET, POST]
+
+app_task_update:
+    path:       /tasks/{id}/update
+    controller: App\Controller\TaskWebController::update
+    methods:    [POST]
+
+app_task_delete:
+    path:       /tasks/{id}/delete
+    controller: App\Controller\TaskWebController::delete
+    methods:    [POST]
 
 # POSTMAN
 # Récupération de toutes les tâches
 get_tasks:
     path:       /api/tasks
-    controller: App\Controller\TaskController::getAll
+    controller: App\Controller\TaskApiController::getAll
     methods:    [GET]
 
 # Récupération d'une tâche
 get_task:
     path:       /api/task/{task}
-    controller: App\Controller\TaskController::get
+    controller: App\Controller\TaskApiController::get
     methods:    [GET]
 
 # Ajout d'une tâche
 add_task:
     path:       /api/task
-    controller: App\Controller\TaskController::add
+    controller: App\Controller\TaskApiController::add
     methods:    [POST]
 
 # Modifier une tâche
 put_patch_task:
     path:       /api/task/{task}
-    controller: App\Controller\TaskController::update
+    controller: App\Controller\TaskApiController::update
     methods:    ['PUT']
 
 # Supprimer une tâche
 delete_task:
     path:       /api/task/{task}
-    controller: App\Controller\TaskController::delete
+    controller: App\Controller\TaskApiController::delete
     methods:    [DELETE]
 

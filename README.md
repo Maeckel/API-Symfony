@@ -56,7 +56,7 @@ symfony server:stop
 ## Exercice 1
 ### Endpoints API
 
-> Pour les endpoints nous utilisons **l'entité Task**, son **repository** et le controller **TaskController.php**.
+> Pour les endpoints nous utilisons **l'entité Task**, son **repository** et le controller **TaskApiController.php**.
 > Les routes sont configurées dans le fichier **config/routes.yaml**.
 > Elles sont testables via **POSTMAN**.
 
@@ -117,7 +117,7 @@ Une interface web est disponible sur `http://127.0.0.1:8000/tasks` permettant de
 - Modifier le statut d'une tâche
 - Supprimer une tâche
 
-> Le twig utilisé est **templates/task/index.html.twig**.
+> Le twig utilisé est **templates/task/index.html.twig** et le controller est **src/controller/TaskWebController.php**.
 
 ---
 
