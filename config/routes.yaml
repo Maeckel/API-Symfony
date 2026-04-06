@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../vendor/symfony/routing/Loader/schema/routing.schema.json
+
+# This file is the entry point to configure the routes of your app.
+# Methods with the #[Route] attribute are automatically imported.
+# See also https://symfony.com/doc/current/routing.html
+
+# To list all registered routes, run the following command:
+#   bin/console debug:router
+
+controllers:
+    resource: routing.controllers
+
+# Interface web
+app_task:
+    path:       /tasks
+    controller: App\Controller\TaskController::index
+
+# POSTMAN
+# Récupération de toutes les tâches
+get_tasks:
+    path:       /api/tasks
+    controller: App\Controller\TaskController::getAll
+    methods:    [GET]
+
+# Récupération d'une tâche
+get_task:
+    path:       /api/task/{task}
+    controller: App\Controller\TaskController::get
+    methods:    [GET]
+
+# Ajout d'une tâche
+add_task:
+    path:       /api/task
+    controller: App\Controller\TaskController::add
+    methods:    [POST]
+
+# Modifier une tâche
+put_patch_task:
+    path:       /api/task/{task}
+    controller: App\Controller\TaskController::update
+    methods:    ['PUT']
+
+# Supprimer une tâche
+delete_task:
+    path:       /api/task/{task}
+    controller: App\Controller\TaskController::delete
+    methods:    [DELETE]
+

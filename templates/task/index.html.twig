@@ -1,0 +1,62 @@
+{# templates/task/index.html.twig #}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestionnaire de tâches</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+<body>
+    <div class="container">
+    <h1>Gestionnaire de tâches</h1>
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Statut</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %} {# Boucle pour afficher les tâches existantes #}
+                <tr>
+                    <td class="id">{{ task.id }}</td>
+                    <td class="title">{{ task.title }}</td>
+                    <td class="desc">{{ task.description }}</td>
+                    <td>
+                        <form method="POST" action="{{ path('app_task') }}"> {# Formulaire pour modifier la statût d'une tâche #}
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="id" value="{{ task.id }}">
+                            <input type="text" name="statut" value="{{ task.status }}">
+                            <button class="btn" type="submit">Modifier</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ path('app_task') }}"> {# Formulaire pour supprimer une tâche #}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="id" value="{{ task.id }}">
+                            <button class="btn" type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %} {# Si il n'y a pas de tâches #}
+                <tr>
+                    <td colspan="6" class="empty">Aucune tâche pour l'instant.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+        <form method="POST" action="{{ path('app_task') }}"> {# Formulaire pour créer une tâche #}
+            <input type="hidden" name="_method" value="POST">
+            <input type="text" name="titre" placeholder="Titre" required> {# Tout les champs doivent ếtre renseignés #}
+            <input type="text" name="description" placeholder="Description" required>
+            <input type="text" name="statut" placeholder="En attente, En cours, Terminé..." required>
+            <button class="btn" type="submit">Ajouter</button>
+        </form>
+    </div>
+</body>
+</html>
