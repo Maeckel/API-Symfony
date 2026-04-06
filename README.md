@@ -98,15 +98,6 @@ Pour gérer les permissions dans une application de gestion, j'utiliserais un sy
 - Chaque rôle définit un ensemble de **permissions** sur les ressources (lire, créer, modifier, supprimer)
 - Par exemple : lire, créer, modifier, supprimer une tâche pour `ADMIN`, `SUPER_ADMIN` et lire, modifier une tâche pour `USER` (seulement celles qui lui s'on assignées)
 
-## Exercice 3
-### Déploiement
-
-L'API est déployée en ligne sur Railway :
-
-**URL** : ``
-
----
-
 ## Exercice 4
 ### Interface web
 
